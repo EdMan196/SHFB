@@ -1,4 +1,16 @@
-Welcome to the **Sandcastle Help File Builder** project.
+Welcome to my fork of the **Sandcastle Help File Builder** project.
+
+##### What's been added?
+
+This fork adds **support for Kramdown's variant of Markdown** and also adds **Jekyll support** in the Markdown output. This allows you to deploy SHFB documentation to (non-GitHub Pages) sites easily. Jekyll allows you to theme the documentation however you like.
+
+##### Why?
+
+The [FlingOS project](http://www.flingos.co.uk) maintains up-to-date documentation built from the code and a set of reference articles (available at [docs.flingos.co.uk](http://docs.flingos.co.uk)). MAML is an awful language for writing conceptual content because of its huge quantity of boilerplate and hard-to-read/write (compared to a normal article) XML syntax. Markdown is a much nicer syntax but SHFB does not support it as an input format. 
+
+This fork allows you to produce Markdown output for use in a Jekyll site, allowing you to easily incldue your own, easier-to-write Markdown articles alongside the technical documentation.
+
+##### The usual stuff
 
 * [Get the current release](https://github.com/EWSoftware/SHFB/releases)
 * [Ask a question or open an issue](https://github.com/EWSoftware/SHFB/issues)
