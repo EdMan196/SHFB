@@ -1,7 +1,7 @@
 <content xml:space="preserve">
 
 	<!-- Media file path -->
-	<item id="mediaPath">media/{0}</item>
+	<item id="mediaPath">/docs/media/{0}</item>
 	
 	<!-- Topic title -->
 	<item id="boilerplate_pageTitle">{0}</item>

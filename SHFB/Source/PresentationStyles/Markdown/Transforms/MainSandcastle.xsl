@@ -43,7 +43,7 @@
 	Body
 	============================================================================================= -->
 
-	<xsl:template name="t_body">
+	<xsl:template name="t_body">    
 		<!-- auto-inserted info -->
 		<xsl:apply-templates select="/document/comments/preliminary"/>
 
@@ -428,10 +428,10 @@
 						</tr>
 						<xsl:for-each select="/document/comments/event">
 							<tr>
-								<td>
+                <td markdown="span">
 									<referenceLink target="{@cref}" qualified="true"/>
 								</td>
-								<td>
+                <td markdown="span">
 									<xsl:apply-templates select="."/>
 								</td>
 							</tr>
@@ -462,10 +462,10 @@
 						</tr>
 						<xsl:for-each select="/document/comments/exception">
 							<tr>
-								<td>
+                <td markdown="span">
 									<referenceLink target="{@cref}" qualified="false"/>
 								</td>
-								<td>
+                <td markdown="span">
 									<xsl:apply-templates select="."/>
 								</td>
 							</tr>
@@ -526,10 +526,10 @@
 						</tr>
 						<xsl:for-each select="/document/comments/permission">
 							<tr>
-								<td>
+                <td markdown="span">
 									<referenceLink target="{@cref}" qualified="true"/>
 								</td>
-								<td>
+                <td markdown="span">
 									<xsl:apply-templates select="."/>
 								</td>
 							</tr>
@@ -696,7 +696,7 @@
 			</tr>
 			<xsl:for-each select="$p_contracts">
 				<tr>
-					<td>
+          <td markdown="span">
 						<div style="margin-bottom: 0pt; white-space: pre-wrap;">
 							<pre xml:space="preserve" style="margin-bottom: 0pt"><xsl:value-of select="."/></pre>
 						</div>
@@ -920,7 +920,7 @@
 			<xsl:for-each select="item">
 				<tr>
 					<xsl:for-each select="*">
-						<td>
+            <td markdown="span">
 							<xsl:apply-templates/>
 						</td>
 					</xsl:for-each>
@@ -1232,13 +1232,13 @@
 							<xsl:for-each select="/document//revisionHistory/revision">
 								<xsl:if test="not(@visible='false')">
 									<tr>
-										<td>
+										<td markdown="span">
 											<xsl:value-of select="@date"/>
 										</td>
-										<td>
+                    <td markdown="span">
 											<xsl:value-of select="@version"/>
 										</td>
-										<td>
+                    <td markdown="span">
 											<xsl:apply-templates />
 										</td>
 									</tr>

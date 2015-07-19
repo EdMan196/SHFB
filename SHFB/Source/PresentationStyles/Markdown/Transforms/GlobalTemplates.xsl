@@ -19,7 +19,7 @@
 	<xsl:template name="t_putIndent">
 		<xsl:param name="p_count" />
 		<xsl:if test="$p_count &gt; 1">
-			<xsl:text>&#160;&#160;</xsl:text>
+			<xsl:text>  </xsl:text>
 			<xsl:call-template name="t_putIndent">
 				<xsl:with-param name="p_count" select="$p_count - 1" />
 			</xsl:call-template>
@@ -43,6 +43,20 @@
 
 	</xsl:template>
 
+  <!-- Indent by 2*n points and insert final bullet point -->
+  <xsl:template name="t_putBulletIndent">
+    <xsl:param name="p_count" />
+    <xsl:if test="$p_count &gt; 1">
+      <xsl:text>  </xsl:text>
+      <xsl:call-template name="t_putBulletIndent">
+        <xsl:with-param name="p_count" select="$p_count - 1" />
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$p_count = 1">
+      <xsl:text>* </xsl:text>
+    </xsl:if>
+  </xsl:template>
+  
 	<!-- ============================================================================================
 	Text handling
 	============================================================================================= -->
@@ -376,7 +390,7 @@
 				</th>
 			</tr>
 			<tr>
-				<td>
+				<td markdown="span">
 					<xsl:choose>
 						<xsl:when test="$p_alertContent=''">
 							<xsl:apply-templates/>

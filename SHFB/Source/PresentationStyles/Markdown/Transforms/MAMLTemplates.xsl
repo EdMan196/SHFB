@@ -762,7 +762,7 @@
 	</xsl:template>
 
 	<xsl:template match="ddue:entry" name="t_ddue_entry">
-		<td>
+    <td markdown="span">
 			<xsl:if test="@address">
 				<xsl:attribute name="id">
 					<xsl:value-of select="@address"/>

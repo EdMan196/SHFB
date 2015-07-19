@@ -79,11 +79,21 @@
 
 	<xsl:template match="/">
 		<document>
+<xsl:text>---
+layout: post
+categories: docs
+slug: </xsl:text><xsl:value-of select="/document/reference/file/@name" />
+<xsl:text>
+title: </xsl:text><xsl:call-template name="t_topicTitlePlain"/>
+<xsl:text>
+permalink: /:categories/:title/
+---
+</xsl:text>
 			<xsl:text>&#xa;</xsl:text>
 			<!-- This is used by the Save Component to get the filename.  It won't end up in the final result. -->
 			<file>
 				<xsl:attribute name="name">
-					<xsl:value-of select="/document/reference/file/@name" />
+          <xsl:value-of select="/document/reference/file/@name" />
 				</xsl:attribute>
 			</file>
 			<xsl:text>&#xa;</xsl:text>
@@ -573,7 +583,6 @@
 				<xsl:with-param name="p_titleInclude" select="'title_namespaces'"/>
 				<xsl:with-param name="p_content">
 					<xsl:text>&#xa;</xsl:text>
-					<xsl:text>&#160;</xsl:text>
 					<table>
 						<tr>
 							<th>
@@ -587,7 +596,6 @@
 							<xsl:sort select="apidata/@name"/>
 						</xsl:apply-templates>
 					</table>
-					<xsl:text>&#160;</xsl:text>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -634,7 +642,6 @@
 				<xsl:with-param name="p_titleInclude" select="'tableTitle_namespace'"/>
 				<xsl:with-param name="p_content">
 					<xsl:text>&#xa;</xsl:text>
-					<xsl:text>&#160;</xsl:text>
 					<table>
 						<tr>
 							<th>
@@ -648,7 +655,6 @@
 							<xsl:sort select="substring-after(@api, ':')"/>
 						</xsl:apply-templates>
 					</table>
-					<xsl:text>&#160;</xsl:text>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -657,10 +663,10 @@
 
 	<xsl:template match="element" mode="namespaceGroup" name="t_namespaceGroupElement">
 		<tr>
-			<td>
+			<td markdown="block">
 				<referenceLink target="{@api}" qualified="false"/>
 			</td>
-			<td>
+			<td markdown="span">
 				<xsl:call-template name="t_getElementDescription"/>
 			</td>
 		</tr>
@@ -672,7 +678,6 @@
 				<xsl:with-param name="p_titleInclude" select="'topicTitle_enumMembers'"/>
 				<xsl:with-param name="p_content">
 					<xsl:text>&#xa;</xsl:text>
-					<xsl:text>&#160;</xsl:text>
 					<table>
 						<tr>
 							<th>
@@ -692,7 +697,7 @@
 						</tr>
 						<xsl:apply-templates select="element" mode="enumeration"/>
 					</table>
-					<xsl:text>&#160;</xsl:text>
+					<xsl:text>&#xa;</xsl:text>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -779,7 +784,6 @@
 				<xsl:with-param name="p_titleInclude" select="'derivedClasses'"/>
 				<xsl:with-param name="p_content">
 					<xsl:text>&#xa;</xsl:text>
-					<xsl:text>&#160;</xsl:text>
 					<table>
 						<tr>
 							<th>
@@ -793,7 +797,6 @@
 							<xsl:sort select="apidata/@name"/>
 						</xsl:apply-templates>
 					</table>
-					<xsl:text>&#160;</xsl:text>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -841,7 +844,6 @@
 	<xsl:template name="t_putNamespaceList">
 		<xsl:param name="p_listSubgroup"/>
 		<xsl:text>&#xa;</xsl:text>
-		<xsl:text>&#160;</xsl:text>
 		<table>
 			<tr>
 				<th>
@@ -858,7 +860,6 @@
 				<xsl:sort select="@api"/>
 			</xsl:apply-templates>
 		</table>
-		<xsl:text>&#160;</xsl:text>
 		<xsl:text>&#xa;</xsl:text>
 	</xsl:template>
 
@@ -899,21 +900,19 @@
 				<xsl:with-param name="p_titleInclude" select="$v_header"/>
 				<xsl:with-param name="p_toplink" select="true()"/>
 				<xsl:with-param name="p_content">
-					<xsl:text>&#xa;</xsl:text>
-					<xsl:text>&#160;</xsl:text>
-					<table>
-						<tr>
-							<th>
-								<xsl:text>&#160;</xsl:text>
-							</th>
-							<th>
-								<include item="header_typeName"/>
-							</th>
-							<th>
-								<include item="header_typeDescription"/>
-							</th>
-						</tr>
-
+          <xsl:text>&#xa;</xsl:text>
+          <table>
+            <tr>
+              <th>
+                <xsl:text>&#160;</xsl:text>
+              </th>
+              <th>
+                <include item="header_typeName"/>
+              </th>
+              <th>
+                <include item="header_typeDescription"/>
+              </th>
+            </tr>          
 						<!-- Add a row for each member of the current subgroup-visibility -->
 						<xsl:choose>
 							<xsl:when test="boolean($p_sort)">
@@ -929,8 +928,7 @@
 								</xsl:apply-templates>
 							</xsl:otherwise>
 						</xsl:choose>
-					</table>
-					<xsl:text>&#160;</xsl:text>
+          </table>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -943,7 +941,7 @@
 
 	<xsl:template match="element" mode="root" name="t_rootElement">
 		<tr>
-			<td>
+			<td markdown="span">
 				<xsl:choose>
 					<xsl:when test="apidata/@name = ''">
 						<referenceLink target="{@api}" qualified="false">
@@ -955,7 +953,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</td>
-			<td>
+			<td markdown="span">
 				<xsl:call-template name="t_getElementDescription"/>
 			</td>
 		</tr>
@@ -970,15 +968,15 @@
 			</xsl:choose>
 		</xsl:variable>
 		<tr>
-			<td>
+			<td markdown="span">
 				<xsl:call-template name="t_putTypeIcon">
 					<xsl:with-param name="p_typeVisibility" select="$v_typeVisibility"/>
 				</xsl:call-template>
 			</td>
-			<td>
+			<td markdown="span">
 				<referenceLink target="{@api}" qualified="false"/>
 			</td>
-			<td>
+			<td markdown="span">
 				<xsl:if test="attributes/attribute/type[@api='T:System.ObsoleteAttribute']">
 					<xsl:text> </xsl:text>
 					<include item="boilerplate_obsoleteShort"/>
@@ -999,7 +997,7 @@
 			<xsl:call-template name="t_isMemberSupportedOnSilverlightMobile"/>
 		</xsl:variable>
 		<tr>
-			<td>
+			<td markdown="span">
 				<!-- Platform icons -->
 				<xsl:if test="normalize-space($v_supportedOnCf)!=''">
 					<xsl:text>![</xsl:text>
@@ -1036,17 +1034,17 @@
 				</xsl:if>
 			</td>
 			<xsl:variable name="id" select="@api"/>
-			<td target="{$id}">
+			<td target="{$id}" markdown="span">
 				<xsl:text>**</xsl:text>
 				<xsl:value-of select="apidata/@name"/>
 				<xsl:text>**</xsl:text>
 			</td>
 			<xsl:if test="$includeEnumValues='true'">
-				<td>
+				<td markdown="span">
 					<xsl:value-of select="value"/>
 				</td>
 			</xsl:if>
-			<td>
+			<td markdown="span">
 				<xsl:if test="attributes/attribute/type[@api='T:System.ObsoleteAttribute']">
 					<xsl:text> </xsl:text>
 					<include item="boilerplate_obsoleteShort"/>
@@ -1058,7 +1056,7 @@
 
 	<xsl:template match="element" mode="derivedType" name="t_derivedTypeElement">
 		<tr>
-			<td>
+			<td markdown="span">
 				<xsl:choose>
 					<xsl:when test="@display-api">
 						<referenceLink target="{@api}" display-target="{@display-api}"/>
@@ -1068,7 +1066,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</td>
-			<td>
+			<td markdown="span">
 				<xsl:if test="attributes/attribute/type[@api='T:System.ObsoleteAttribute']">
 					<xsl:text> </xsl:text>
 					<include item="boilerplate_obsoleteShort"/>
@@ -1137,8 +1135,9 @@
 		</xsl:variable>
 		<!-- Do not show non-static members of static types -->
 		<xsl:if test=".//memberdata/@static='true' or not(/document/reference/typedata[@abstract='true' and @sealed='true'])">
-			<tr>
-				<td>
+      <xsl:text>&#xa;</xsl:text>
+      <tr>
+        <td markdown="span">
 					<xsl:call-template name="t_putMemberIcons">
 						<xsl:with-param name="p_memberVisibility">
 							<xsl:choose>
@@ -1154,8 +1153,8 @@
 						<xsl:with-param name="p_supportedOnSilverlight" select="normalize-space($v_supportedOnSilverlight)"/>
 						<xsl:with-param name="p_supportedOnSilverlightMobile" select="normalize-space($v_supportedOnSilverlightMobile)"/>
 					</xsl:call-template>
-				</td>
-				<td>
+        </td>
+        <td markdown="span">
 					<xsl:choose>
 						<xsl:when test="normalize-space($v_conversionOperator)!=''">
 							<referenceLink target="{@api}" show-parameters="true"/>
@@ -1174,8 +1173,8 @@
 							<referenceLink target="{@api}" show-parameters="{$p_showParameters}"/>
 						</xsl:otherwise>
 					</xsl:choose>
-				</td>
-				<td>
+        </td>
+        <td markdown="span">
 					<xsl:if test="attributes/attribute/type[@api='T:System.ObsoleteAttribute']">
 						<xsl:text> </xsl:text>
 						<include item="boilerplate_obsoleteShort"/>
@@ -1283,8 +1282,8 @@
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:if>
-				</td>
-			</tr>
+        </td>
+      </tr>
 		</xsl:if>
 	</xsl:template>
 
@@ -1501,7 +1500,7 @@
 				<xsl:for-each select="ancestors/type">
 					<xsl:sort select="position()" data-type="number" order="descending"/>
 
-					<xsl:call-template name="t_putIndent">
+					<xsl:call-template name="t_putBulletIndent">
 						<xsl:with-param name="p_count" select="position()"/>
 					</xsl:call-template>
 
@@ -1509,18 +1508,18 @@
 						<xsl:with-param name="qualified" select="true()"/>
 					</xsl:apply-templates>
 
-					<br/>
+					<xsl:text>&#xa;</xsl:text>
 				</xsl:for-each>
 
-				<xsl:call-template name="t_putIndent">
+				<xsl:call-template name="t_putBulletIndent">
 					<xsl:with-param name="p_count" select="$ancestorCount + 1"/>
 				</xsl:call-template>
 				<referenceLink target="{$key}" qualified="true"/>
-				<br/>
+        <xsl:text>&#xa;</xsl:text>
 
 				<xsl:choose>
 					<xsl:when test="descendents/@derivedTypes">
-						<xsl:call-template name="t_putIndent">
+						<xsl:call-template name="t_putBulletIndent">
 							<xsl:with-param name="p_count" select="$ancestorCount + 2"/>
 						</xsl:call-template>
 						<referenceLink target="{descendents/@derivedTypes}" qualified="true">
@@ -1528,7 +1527,7 @@
 						</referenceLink>
 					</xsl:when>
 					<xsl:when test="not($p_maxCount=0) and count(descendents/type) > $p_maxCount">
-						<xsl:call-template name="t_putIndent">
+						<xsl:call-template name="t_putBulletIndent">
 							<xsl:with-param name="p_count" select="$ancestorCount + 2"/>
 						</xsl:call-template>
 						<a href="#fullInheritance">
@@ -1540,15 +1539,15 @@
 							<xsl:sort select="@api"/>
 
 							<xsl:if test="not(self::type/@api=preceding-sibling::*/self::type/@api)">
-								<xsl:call-template name="t_putIndent">
+								<xsl:call-template name="t_putBulletIndent">
 									<xsl:with-param name="p_count" select="$ancestorCount + 2"/>
 								</xsl:call-template>
 
 								<xsl:apply-templates select="self::type" mode="link">
 									<xsl:with-param name="qualified" select="true()"/>
 								</xsl:apply-templates>
-
-								<br/>
+                
+                <xsl:text>&#xa;</xsl:text>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:otherwise>
@@ -1573,7 +1572,7 @@
 				<xsl:with-param name="p_content">
 					<xsl:for-each select="member">
 						<referenceLink target="{@api}" qualified="true"/>
-						<br/>
+						<xsl:text>&#xa;</xsl:text>
 					</xsl:for-each>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -1794,7 +1793,7 @@
 		<include item="boilerplate_requirementsNamespace"/>
 		<xsl:text>&#xa0;</xsl:text>
 		<referenceLink target="{/document/reference/containers/namespace/@api}"/>
-		<br/>
+		<xsl:text>&#xa;</xsl:text>
 		<xsl:call-template name="t_putAssembliesInfo"/>
 
 		<!-- Show XAML xmlns for APIs that support XAML -->
@@ -1804,7 +1803,7 @@
 			<xsl:if test="boolean(/document/syntax/div[@codeLanguage='XAML']/div[
 										@class='xamlAttributeUsageHeading' or @class='xamlObjectElementUsageHeading' or
 										@class='xamlContentElementUsageHeading' or @class='xamlPropertyElementUsageHeading'])">
-				<br/>
+				<xsl:text>&#xa;</xsl:text>
 				<include item="boilerplate_xamlXmlnsRequirements">
 					<parameter>
 						<xsl:choose>
@@ -1835,7 +1834,7 @@
 					<xsl:call-template name="t_putAssemblyNameAndModule">
 						<xsl:with-param name="library" select="."/>
 					</xsl:call-template>
-					<br/>
+					<xsl:text>&#xa;</xsl:text>
 				</xsl:for-each>
 			</xsl:when>
 			<xsl:otherwise>
@@ -2008,7 +2007,7 @@
 							</parameter>
 						</xsl:for-each>
 					</include>
-					<br/>
+					<xsl:text>&#xa;</xsl:text>
 				</xsl:if>
 				<!-- show the versions in which the api is obsolete with a compiler warning, if any -->
 				<xsl:for-each select=".//version[@obsolete='warning']">
@@ -2017,7 +2016,7 @@
 							<include item="{@name}"/>
 						</parameter>
 					</include>
-					<br/>
+					<xsl:text>&#xa;</xsl:text>
 				</xsl:for-each>
 				<!-- show the versions in which the api is obsolete and does not compile, if any -->
 				<xsl:for-each select=".//version[@obsolete='error']">
@@ -2027,7 +2026,7 @@
 								<include item="{@name}"/>
 							</parameter>
 						</include>
-						<br/>
+						<xsl:text>&#xa;</xsl:text>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:otherwise>
@@ -2045,8 +2044,7 @@
 			</xsl:with-param>
 			<xsl:with-param name="p_content">
 				<xsl:text>&#xa;</xsl:text>
-				<xsl:text>&#160;</xsl:text>
-				<dl>
+				<dl markdown="1">
 					<xsl:for-each select="parameter">
 						<dt>
 							<xsl:value-of select="normalize-space(@name)"/>
@@ -2063,7 +2061,7 @@
 									</xsl:apply-templates>
 								</parameter>
 							</include>
-							<br/>
+							<xsl:text>&#xa;</xsl:text>
 							<xsl:call-template name="t_getParameterDescription">
 								<xsl:with-param name="name" select="normalize-space(@name)"/>
 							</xsl:call-template>
@@ -2071,7 +2069,6 @@
 						<xsl:text>&#xa;</xsl:text>
 					</xsl:for-each>
 				</dl>
-				<xsl:text>&#160;</xsl:text>
 				<xsl:text>&#xa;</xsl:text>
 			</xsl:with-param>
 		</xsl:call-template>
