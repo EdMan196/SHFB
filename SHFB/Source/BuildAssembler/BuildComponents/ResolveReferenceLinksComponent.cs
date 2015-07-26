@@ -397,7 +397,7 @@ namespace Microsoft.Ddue.Tools.BuildComponent
                             href = href.GetRelativePath(document.EvalXPathExpr(baseUrl, "key", key));
 
                         writer.WriteStartElement("a");
-                        writer.WriteAttributeString("href", "/docs/" + href);
+                        writer.WriteAttributeString("href", "../" + href);
                         break;
 
                     case ReferenceLinkType.Msdn:

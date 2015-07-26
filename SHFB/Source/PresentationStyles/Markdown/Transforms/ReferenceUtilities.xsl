@@ -86,7 +86,6 @@ slug: </xsl:text><xsl:value-of select="/document/reference/file/@name" />
 <xsl:text>
 title: </xsl:text><xsl:call-template name="t_topicTitlePlain"/>
 <xsl:text>
-permalink: /:categories/:title/
 ---
 </xsl:text>
 			<xsl:text>&#xa;</xsl:text>
