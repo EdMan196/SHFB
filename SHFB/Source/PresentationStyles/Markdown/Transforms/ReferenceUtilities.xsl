@@ -81,7 +81,7 @@
 		<document>
 <xsl:text>---
 layout: post
-categories: docs
+categories: docs technical
 slug: </xsl:text><xsl:value-of select="/document/reference/file/@name" />
 <xsl:text>
 title: </xsl:text><xsl:call-template name="t_topicTitlePlain"/>
