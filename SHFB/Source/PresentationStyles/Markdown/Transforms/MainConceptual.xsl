@@ -41,7 +41,7 @@
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:text># </xsl:text>
-			<include item="boilerplate_pageTitle">
+			<!--<include item="boilerplate_pageTitle">
 				<parameter>
 					<xsl:choose>
 						<xsl:when test="normalize-space(/document/metadata/title)">
@@ -52,7 +52,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</parameter>
-			</include>
+			</include>-->
 			<span id="PageHeader">
 				<xsl:text> </xsl:text>
 			</span>

@@ -80,7 +80,7 @@
 	<xsl:template match="/">
 		<document>
 <xsl:text>---
-layout: post
+layout: technical-article
 categories: docs technical
 slug: </xsl:text><xsl:value-of select="/document/reference/file/@name" />
 <xsl:text>
@@ -96,12 +96,12 @@ title: </xsl:text><xsl:call-template name="t_topicTitlePlain"/>
 				</xsl:attribute>
 			</file>
 			<xsl:text>&#xa;</xsl:text>
-			<xsl:text># </xsl:text>
+			<!--<xsl:text># </xsl:text>
 			<include item="boilerplate_pageTitle">
 				<parameter>
 					<xsl:call-template name="t_topicTitleDecorated"/>
 				</parameter>
-			</include>
+			</include>-->
 			<span id="PageHeader">
 				<xsl:text> </xsl:text>
 			</span>
