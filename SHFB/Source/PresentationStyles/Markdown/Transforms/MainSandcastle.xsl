@@ -43,35 +43,47 @@
 	Body
 	============================================================================================= -->
 
-	<xsl:template name="t_body">    
+	<xsl:template name="t_body">
 		<!-- auto-inserted info -->
 		<xsl:apply-templates select="/document/comments/preliminary"/>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<xsl:if test="/document/reference/attributes/attribute/type[@api='T:System.ObsoleteAttribute']">
 			<xsl:text>&#xa;</xsl:text>
 			<include item="boilerplate_obsoleteLong"/>
 			<xsl:text>&#xa;</xsl:text>
 		</xsl:if>
-
+    
 		<xsl:apply-templates select="/document/comments/summary"/>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<xsl:if test="$g_apiTopicSubGroup='overload'">
 			<xsl:apply-templates select="/document/reference/elements" mode="overloadSummary"/>
 		</xsl:if>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- inheritance -->
 		<xsl:apply-templates select="/document/reference/family"/>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- assembly information -->
 		<xsl:if test="not($g_apiTopicGroup='list' or $g_apiTopicGroup='root' or $g_apiTopicGroup='namespace' or $g_apiTopicGroup='namespaceGroup')">
 			<xsl:call-template name="t_putRequirementsInfo"/>
 		</xsl:if>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- syntax -->
 		<xsl:if test="not($g_apiTopicGroup='list' or $g_apiTopicGroup='root' or $g_apiTopicGroup='namespace' or $g_apiTopicGroup='namespaceGroup')">
 			<xsl:apply-templates select="/document/syntax"/>
 		</xsl:if>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- members -->
 		<xsl:choose>
 			<xsl:when test="$g_apiTopicGroup='root'">
@@ -104,32 +116,65 @@
 			</xsl:when>
 		</xsl:choose>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- events -->
 		<xsl:call-template name="t_events"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- exceptions -->
 		<xsl:call-template name="t_exceptions"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- remarks -->
 		<xsl:apply-templates select="/document/comments/remarks"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- examples -->
 		<xsl:apply-templates select="/document/comments/example"/>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- contracts -->
 		<xsl:call-template name="t_contracts"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!--versions-->
 		<xsl:if test="not($g_apiTopicGroup='list' or $g_apiTopicGroup='root' or $g_apiTopicGroup='namespace' or $g_apiTopicGroup='namespaceGroup')">
 			<xsl:apply-templates select="/document/reference/versions"/>
 		</xsl:if>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- permissions -->
 		<xsl:call-template name="t_permissions"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- thread safety -->
 		<xsl:apply-templates select="/document/comments/threadsafety"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- revisions -->
 		<xsl:call-template name="t_revisionHistory"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- bibliography -->
 		<xsl:call-template name="t_bibliography"/>
+
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- see also -->
 		<xsl:call-template name="t_putSeeAlsoSection"/>
 
+    <xsl:text>&#xa;</xsl:text>
+    
 		<!-- Add the full inheritance hierarchy if needed -->
 		<xsl:if test="count(/document/reference/family/descendents/type) > 5">
 			<xsl:apply-templates select="/document/reference/family" mode="fullInheritance"/>

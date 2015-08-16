@@ -99,20 +99,6 @@
 
 	<xsl:template name="t_putCodeSection">
 		<xsl:param name="p_codeLang" />
-		<xsl:if test="(normalize-space(@title) != '') or (not(@title) and normalize-space($p_codeLang) != '' and $p_codeLang != 'other' and $p_codeLang != 'none')">
-      <xsl:choose>
-				<xsl:when test="@title">
-					<xsl:text>&#xa;**</xsl:text>
-					<xsl:value-of select="@title" />
-					<xsl:text>**</xsl:text>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:text>&#xa;**</xsl:text>
-					<include item="devlang_{$p_codeLang}"/>
-					<xsl:text>**</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:if>
 		<xsl:text>&#xa;&#xa;```</xsl:text>
 		<xsl:if test="normalize-space($p_codeLang) != '' and $p_codeLang != 'other' and $p_codeLang != 'none'">
 			<xsl:text> </xsl:text>
