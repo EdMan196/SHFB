@@ -469,7 +469,7 @@
   <item id="SMCAutoDocDispose">Releases all resources used by the <referenceLink target="T:{0}" /></item>
   <item id="SMCAutoDocDisposeBool">Releases the unmanaged resources used by the <referenceLink target="T:{0}" /> and optionally releases the managed resources</item>
   <item id="SMCAutoDocDisposeParam">True to release both managed and unmanaged resources; false to release only unmanaged resources</item>
-  <item id="SMCMissingTag">\[Missing &lt;{0}&gt; documentation for "{1}"\]</item>
-  <item id="SMCMissingParamTag">\[Missing &lt;{0} name="{1}"/&gt; documentation for "{2}"\]</item>
-  <item id="SMCMissingIncludeTarget">\[Missing &lt;include&gt; target documentation in '{0}'.  File: '{1}' Path: '{2}'\]</item>
+  <item id="SMCMissingTag">&#91;Missing &lt;{0}&gt; documentation for "{1}"&#93;</item>
+  <item id="SMCMissingParamTag">&#91;Missing &lt;{0} name="{1}"/&gt; documentation for "{2}"&#93;</item>
+  <item id="SMCMissingIncludeTarget">&#91;Missing &lt;include&gt; target documentation in '{0}'.  File: '{1}' Path: '{2}'&#93;</item>
 </content>

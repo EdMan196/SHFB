@@ -100,7 +100,7 @@
 	<xsl:template name="t_putCodeSection">
 		<xsl:param name="p_codeLang" />
 		<xsl:if test="(normalize-space(@title) != '') or (not(@title) and normalize-space($p_codeLang) != '' and $p_codeLang != 'other' and $p_codeLang != 'none')">
-			<xsl:choose>
+      <xsl:choose>
 				<xsl:when test="@title">
 					<xsl:text>&#xa;**</xsl:text>
 					<xsl:value-of select="@title" />
@@ -112,12 +112,19 @@
 					<xsl:text>**</xsl:text>
 				</xsl:otherwise>
 			</xsl:choose>
-			<br />
 		</xsl:if>
-		<xsl:text>&#xa;```</xsl:text>
+		<xsl:text>&#xa;&#xa;```</xsl:text>
 		<xsl:if test="normalize-space($p_codeLang) != '' and $p_codeLang != 'other' and $p_codeLang != 'none'">
 			<xsl:text> </xsl:text>
-			<include item="devlang_{$p_codeLang}"/>
+      <xsl:variable name="v_codeLangLC" select="translate($p_codeLang,$g_allUpperCaseLetters,$g_allLowerCaseLetters)"/>
+      <xsl:choose>
+        <xsl:when test="$v_codeLangLC = 'vb-c#' or $v_codeLangLC = 'visualbasicandcsharp' or $v_codeLangLC = 'c#' or $v_codeLangLC = 'csharp'">
+          <xsl:text>cs</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <include item="devlang_{$p_codeLang}"/>
+        </xsl:otherwise>
+      </xsl:choose>
 		</xsl:if>
 		<xsl:text>&#xa;</xsl:text>
 		<!-- Use apply-templates rather than copy-of so ddue:codeFeaturedElement nodes are transformed -->

@@ -472,7 +472,7 @@
   <item id="SMCAutoDocDispose">Освобождает все ресурсы, используемые объектом <referenceLink target="T:{0}" /></item>
   <item id="SMCAutoDocDisposeBool">Освобождает неуправляемые ресурсы, используемые объектом <referenceLink target="T:{0}" />, а при необходимости освобождает также управляемые ресурсы</item>
   <item id="SMCAutoDocDisposeParam">Значение true позволяет освободить управляемые и неуправляемые ресурсы; значение false позволяет освободить только неуправляемые ресурсы.</item>
-  <item id="SMCMissingTag">\[&lt;{0}&gt; отсутствует в документации для "{1}"\]</item>
-  <item id="SMCMissingParamTag">\[&lt;{0} name="{1}"/&gt; отсутствует в документации для "{2}"\]</item>
-  <item id="SMCMissingIncludeTarget">\[&lt;include&gt; отсутствует в '{0}'.  Файл: '{1}' Путь: '{2}'\]</item>
+  <item id="SMCMissingTag">&#91;&lt;{0}&gt; отсутствует в документации для "{1}"&#93;</item>
+  <item id="SMCMissingParamTag">&#91;&lt;{0} name="{1}"/&gt; отсутствует в документации для "{2}"&#93;</item>
+  <item id="SMCMissingIncludeTarget">&#91;&lt;include&gt; отсутствует в '{0}'.  Файл: '{1}' Путь: '{2}'&#93;</item>
 </content>
